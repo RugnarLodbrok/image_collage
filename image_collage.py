@@ -109,13 +109,16 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("image collage maker")
-    parser.add_argument("-c", "--cols", default=0, type=int)
+    parser.add_argument("-c", "--cols", help="number of columns in final result", default=3, type=int)
+    # todo: add auto-guessing columns number by default
     parser.add_argument("--fit", help="the option is useful when images are not exact same size. So you use"
-                                      "`--fit 800:600` or `--fit fff:800:600` to crop/pad the images to the same size",
+                                      "`--fit 800:600` or `--fit fff:800:600` to crop/pad the images to the same size"
+                                      "of 800 x 600 and use fff color for padding",
                         default="", type=str)
-    parser.add_argument("-b", "--border", default=0, type=int)
-    parser.add_argument("-o", "--output", default="collage.jpg", type=str)
-    parser.add_argument("-q", "--quality", help="jpeg quality", default=100, type=int)
+    parser.add_argument("-b", "--border", help="border width, default is 0", default=0, type=int)
+    parser.add_argument("-o", "--output", help="output file name. Extension matters for choosing the format",
+                        default="collage.jpg", type=str)
+    parser.add_argument("-q", "--quality", help="jpeg quality, default is 100%", default=100, type=int)
     parser.add_argument('f_patterns', metavar='N', type=str, nargs='+',
                         help='files or file patterns')
     args = parser.parse_args(sys.argv[1:])
